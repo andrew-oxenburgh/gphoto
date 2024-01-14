@@ -50,19 +50,12 @@ step_2 (){
 
     cat $DIR_1/$ALL_PHOTOS.txt | gsed 's/^...//' | gsed 's/[,"]*$//' | sort -u > $DIR_2/$ALL_PHOTOS.txt
 
-    # cat $DIR_1/$ALBUM_PHOTOS.txt | gsed 's/^...//' | gsed 's/["',]*$//' > $DIR_1/$ALBUM_PHOTOS.txt
-
-    # sed 's/^...\(.*\)[,\"]+$/\1/' $DIR_1/$ALL_PHOTOS.txt | sort> $DIR_2/$ALL_PHOTOS.txt
-    # sed 's/^...\(.*\)[,\"]+$/\1/' $DIR_1/$ALBUM_PHOTOS.txt | sort> $DIR_2/$ALBUM_PHOTOS.txt
-
     ALBUM_LIST=$DIR_2/$ALBUM_PHOTOS.txt
     ALL_LIST=$DIR_2/$ALL_PHOTOS.txt
 
     comm -23 $ALL_LIST $ALBUM_LIST   > $DIR_2/UNALBUMMED.txt
 
     cat $DIR_2/UNALBUMMED.txt | gsed 's/.*/'
-
-    # sed 's/^/{{https://photos.google.com/search/}}/' $DIR_2/UNALBUMMED.txt > output.txt
 
     gsed 's/^/https:\/\/photos.google.com\/search\//' $DIR_2/UNALBUMMED.txt > $UNALBUMED_LIST.md
 
