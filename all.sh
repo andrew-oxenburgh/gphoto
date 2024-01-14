@@ -12,6 +12,9 @@ DIR_2=$DIR/step_2
 ALL_PHOTOS=all-photos
 ALBUM_PHOTOS=album-photos
 
+ALBUM_LIST=$DIR_2/$ALBUM_PHOTOS.txt
+ALL_LIST=$DIR_2/$ALL_PHOTOS.txt
+
 UNALBUMED_LIST=$DIR/unalbumed-files
 
 GOOGLE_PHOTO_SEARCH=https://photos.google.com/search/
@@ -50,18 +53,13 @@ step_2 (){
 
     cat $DIR_1/$ALL_PHOTOS.txt | gsed 's/^...//' | gsed 's/[,"]*$//' | sort -u > $DIR_2/$ALL_PHOTOS.txt
 
-    ALBUM_LIST=$DIR_2/$ALBUM_PHOTOS.txt
-    ALL_LIST=$DIR_2/$ALL_PHOTOS.txt
-
     comm -23 $ALL_LIST $ALBUM_LIST   > $DIR_2/UNALBUMMED.txt
 
-    cat $DIR_2/UNALBUMMED.txt | gsed 's/.*/'
-
     gsed 's/^/https:\/\/photos.google.com\/search\//' $DIR_2/UNALBUMMED.txt > $UNALBUMED_LIST.md
-
+    wc -l $UNALBUMED_LIST.md
 }
 
-rm -f $UNALBUMED_LIST.txt
+rm -f $UNALBUMED_LIST.md
 
 if [ "$LATEST" = "y" ]
 then
