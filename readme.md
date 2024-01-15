@@ -1,5 +1,10 @@
 ## maintining photos using rclone
 
+### This is really rough.
+
+I'll redo this in JS sometime
+
+
 [rclone](https://rclone.org/googlephotos/)
 
 `brew install rclone
